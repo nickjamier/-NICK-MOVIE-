@@ -3,121 +3,107 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Joel Movies</title>
+<title>Nick Movie 🎬</title>
 
 <style>
 body{
-background:#0d0d0d;
-color:white;
-font-family:Arial;
-margin:0;
+    background:#0d0d0d;
+    color:white;
+    font-family:Arial;
+    margin:0;
+    text-align:center;
 }
 
 header{
-background:#111;
-padding:20px;
-text-align:center;
-color:#e50914;
-font-size:24px;
+    background:#111;
+    padding:20px;
+    color:#e50914;
+    font-size:26px;
 }
 
-.movies{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
-gap:20px;
-padding:20px;
-}
-
-.movie{
-background:#1a1a1a;
-border-radius:10px;
-overflow:hidden;
-cursor:pointer;
-}
-
-.movie img{
-width:100%;
-}
-
-.movie h3{
-text-align:center;
-padding:10px;
-}
-
-.popup{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-background:rgba(0,0,0,0.9);
-display:none;
-justify-content:center;
-align-items:center;
-}
-
-.popup-content{
-background:#111;
-padding:30px;
-border-radius:10px;
-text-align:center;
+.movie-container{
+    margin-top:30px;
 }
 
 button{
-padding:10px 20px;
-background:#e50914;
-border:none;
-color:white;
-cursor:pointer;
-margin-top:10px;
+    padding:12px 25px;
+    background:#e50914;
+    border:none;
+    color:white;
+    font-size:16px;
+    cursor:pointer;
+    border-radius:5px;
+}
+
+video{
+    width:80%;
+    max-width:700px;
+    display:none;
+    margin-top:20px;
+}
+
+.popup{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:rgba(0,0,0,0.9);
+    display:none;
+    justify-content:center;
+    align-items:center;
+}
+
+.popup-content{
+    background:#111;
+    padding:30px;
+    border-radius:10px;
 }
 </style>
-
 </head>
+
 <body>
 
 <header>
-🎬 Nick Movies
+🎬 Nick Movie
 </header>
 
-<div class="movies">
+<div class="movie-container">
+    <h2>Watch Movie</h2>
+    <button onclick="openPayment()">Unlock Movie (500 UGX)</button>
 
-<div class="movie" onclick="pay()">
-<img src="https://image.tmdb.org/t/p/w500/qJ2tW6WMUDux911r6m7haRef0WH.jpg">
-<h3>The Dark Knight</h3>
+    <br>
+
+    <video id="moviePlayer" controls>
+        <source src="movies/movie1.mp4" type="video/mp4">
+    </video>
 </div>
 
-<div class="movie" onclick="pay()">
-<img src="https://image.tmdb.org/t/p/w500/8UlWHLMpgZm9bx6QYh0NFoq67TZ.jpg">
-<h3>Wonder Woman</h3>
-</div>
+<div class="popup" id="paymentPopup">
+    <div class="popup-content">
+        <h2>Mobile Money Payment</h2>
+        <p>Send <b>500 UGX</b> to:</p>
+        <p style="font-size:20px;"><b>0748536581</b></p>
 
-</div>
-
-<div class="popup" id="popup">
-<div class="popup-content">
-<h2>Pay to Watch</h2>
-<p>Send <b>1000 UGX</b> via Airtel Money</p>
-<p>Number: <b>0748611170</b></p>
-
-<button onclick="paid()">I HAVE PAID</button>
-<br>
-<button onclick="closePopup()">Cancel</button>
-</div>
+        <button onclick="confirmPayment()">I HAVE PAID</button>
+        <br><br>
+        <button onclick="closePopup()">Cancel</button>
+    </div>
 </div>
 
 <script>
-function pay(){
-document.getElementById("popup").style.display="flex";
+function openPayment(){
+    document.getElementById("paymentPopup").style.display="flex";
 }
 
 function closePopup(){
-document.getElementById("popup").style.display="none";
+    document.getElementById("paymentPopup").style.display="none";
 }
 
-function paid(){
-alert("Payment received. Movie unlocked.");
-document.getElementById("popup").style.display="none";
+function confirmPayment(){
+    document.getElementById("paymentPopup").style.display="none";
+    document.getElementById("moviePlayer").style.display="block";
+    alert("Payment confirmed. Movie unlocked!");
 }
 </script>
 
